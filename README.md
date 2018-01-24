@@ -1,0 +1,1 @@
+Making a create, read, update, and delete application that creates data, shows it on the browser, updates it whenever needed, and deletes it when it is no longer needed with the Python back-end framework Django.
