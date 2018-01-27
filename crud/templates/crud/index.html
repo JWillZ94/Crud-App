@@ -1,0 +1,14 @@
+{% extends 'crud/base.html' %}
+
+{% block body %}
+  <h1><a href="{% url 'crud:register' %}">Sign Up</a></h1>
+  <h1>Login</h1>
+  <form action="/admin/" method="post">
+    <label for="">Email: </label>
+    <input type="email" name="email">
+    <label for="">Password: </label>
+    <input type="password" name="password">
+    <button type="submit" value="Log In">Login</button>
+    <button type="reset">Reset</button>
+  </form>
+{% endblock %}

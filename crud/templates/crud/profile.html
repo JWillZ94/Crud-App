@@ -1,0 +1,29 @@
+{% extends 'crud/base.html' %}
+
+{% block body %}
+  {{ profile.first_name }}
+  {{ profile.last_name }}
+  {{ profile.password }}
+  {{ profile.email }}
+  <img src="{{ profile.image.url }}" alt="profile-img">
+  {{ profile.bio }}
+  {{ profile.gender }}
+
+  <form action="{% url 'crud:profile-update' profile.id %}">
+    {% csrf_token %}
+    <input type="hidden" name="profile_id" value="{{ profile.id }}">
+    <button type="submit">Update Profile</button>
+  </form>
+
+  <form action="{% url 'crud:profile-delete' profile.id %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="profile_id" value="{{ profile.id }}">
+    <button type="submit">Delete Profile</button>
+  </form>
+
+  
+
+  {% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+  {% endif %}
+{% endblock %}
