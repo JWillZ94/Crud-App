@@ -1,24 +1,45 @@
 from django import forms
 from django.contrib.auth.models import User
-
+from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
-class ProfileForm(forms.ModelForm):
-    first_name = forms.CharField(label="first_name", max_length=30)
-    last_name = forms.CharField(label="last_name", max_length=30)
-    password = forms.CharField(label="password", widget=forms.PasswordInput)
-    email = forms.EmailField(label="email", max_length=254)
-    image = forms.ImageField(label="image", max_length=100)
-    bio = forms.CharField(label="bio", widget=forms.Textarea)
-    gender = forms.CharField(label="gender", max_length=20)
-
-    class Meta:
-        model = Profile
-        fields = ['first_name', 'last_name', 'password', 'email', 'image', 'bio', 'gender']
-
-class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
+'''class RegisterForm(UserCreationForm):
+    email = forms.EmailField(required = True)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
+        fields = (
+            'username',
+            'email',
+            'first_name',
+            'last_name',
+            'password1',
+            'password2'
+        )
+
+    def save(self, commit = True):
+        user =  super(RegisterForm, self).save(commit = False)
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name =  self.cleaned_data['last_name']
+        user.email =  self.cleaned_data['email']
+
+        if commit:
+            user.save()
+
+            return user'''
+
+
+class ProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ['image', 'bio', 'gender']
+
+
+class LoginForm(forms.ModelForm):
+    email = forms.EmailField(max_length=254)
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = Profile
+        fields = []

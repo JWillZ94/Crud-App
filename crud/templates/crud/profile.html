@@ -1,9 +1,8 @@
 {% extends 'crud/base.html' %}
 
 {% block body %}
-  {{ profile.first_name }}
+  <!--{{ profile.first_name }}
   {{ profile.last_name }}
-  {{ profile.password }}
   {{ profile.email }}
   <img src="{{ profile.image.url }}" alt="profile-img">
   {{ profile.bio }}
@@ -21,9 +20,13 @@
     <button type="submit">Delete Profile</button>
   </form>
 
-  
+  <form action="{% url 'crud:logout' %}">
+    {% csrf_token %}
+    <button type="submit">Log Out</button>
+  </form>
+
 
   {% if error_message %}
     <p><strong>{{ error_message }}</strong></p>
-  {% endif %}
+  {% endif %}-->
 {% endblock %}

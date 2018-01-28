@@ -7,9 +7,11 @@ app_name = 'crud'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^register/$', views.UserFormView.as_view(), name='register'),
+    '''url(r'^register/$', views.register, name='register'),
+    url(r'^login/$', views.LoginFormView.as_view(), name='login'),
+    url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^(?P<pk>[0-9]+)/$', views.ProfileView.as_view(), name="profile"),
     url(r'profile/add/$', views.ProfileCreate.as_view(), name='profile-add'),
     url(r'profile/(?P<pk>[0-9]+)/$', views.ProfileUpdate.as_view(), name='profile-update'),
-    url(r'profile/(?P<pk>[0-9]+)/delete/$', views.ProfileDelete.as_view(), name='profile-delete'),
+    url(r'profile/(?P<pk>[0-9]+)/delete/$', views.ProfileDelete.as_view(), name='profile-delete'),'''
 ]
