@@ -7,97 +7,18 @@ from django.views import generic
 from django.views.generic import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import User, Profile
-#from .forms import RegisterForm, ProfileForm, LoginForm
+from .forms import UserForm, ProfileForm
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
 
-def index(request):
+def index(request): # Landing page
     context = {}
     return render(request, 'crud/index.html', context)
 
-'''def register(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        profile_form = ProfileForm(request.POST)
-        if form.is_valid() and profile_form.is_valid():
-            form.save()
-            profile_form.save()
-            return redirect('crud:login')
-
-    else:
-        form = RegistrationForm()
-        profile_form = ProfileForm()
-
-
-    return render(request, 'crud/registration_form.html', {'form': form})
-
-class ProfileView(generic.DetailView):
-    model = User
-    template_name = 'crud/user_profile.html'
-
-class ProfileCreate(CreateView):
-    model = User
-    fields = ['first_name', 'last_name', 'password', 'email', 'image', 'bio', 'gender']
-
-class ProfileUpdate(UpdateView):
-    model = User
-    fields = ['first_name', 'last_name', 'password', 'email', 'image', 'bio', 'gender']
-
-class ProfileDelete(DeleteView):
-    model = User
-    success_url = reverse_lazy('crud:index')
-
-class ProfileFormView(View):
-    form_class = ProfileForm
-    template_name = 'crud/registration_form.html'
-
-    def get(self, request):
-        form = self.form_class(None)
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request):
-        form = self.form_class(request.POST)
-
-        if form.is_valid():
-            user = form.save(commit=False)
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user.set_password(password)
-            user.save()
-
-            user = authenticate(username=username, password=password)
-
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('crud:profile-add')
-
-        return render(request, self.template_name, {'form': form})
-
-class LoginFormView(View):
-    form_class = LoginForm
-    template_name = 'crud/login_form.html'
-
-    def get(self, request):
-        form = self.form_class(None)
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request):
-        form = self.form_class(request.POST)
-
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(username=username, password=password)
-
-            if user is not None:
-                login(request, user)
-                return redirect('crud:profile')
-
-def logout_view(request):
-    logout(request)
-    return redirect('crud:index')
-
-def update_profile(request):
+@login_required
+@transaction.atomic
+def update_profile(request): # Shows Profile form
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
@@ -115,4 +36,27 @@ def update_profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
-'''
+
+class ProfileView(generic.DetailView): # Shows profile
+    model = User
+    template_name = 'crud/user_profile.html'
+
+class ProfileCreate(CreateView): # Adds profile
+    model = Profile
+    fields = ['first_name', 'last_name', 'password', 'email', 'image', 'bio', 'gender']
+
+class ProfileUpdate(UpdateView): # Updates profile
+    model = User
+    fields = ['first_name', 'last_name', 'password', 'email', 'image', 'bio', 'gender']
+
+class ProfileDelete(DeleteView): # Deletes profile
+    model = User
+    success_url = reverse_lazy('crud:index')
+
+class LoginForm():
+    model = User
+    fields = ['email', 'password']
+
+def logout_view(request): # Logs out user
+    logout(request)
+    return redirect('crud:index')

@@ -1,0 +1,6 @@
+Django==2.0.1
+Pillow==5.0.0
+pygame==1.9.3
+pytz==2017.2
+virtualenv==15.1.0
+virtualenvwrapper-win==1.2.1
