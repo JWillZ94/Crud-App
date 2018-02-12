@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.conf import settings
+'''from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
-from django.http import Http404
+from django.http import Http404'''
 from django.http import HttpResponseRedirect
 from django.views import generic
 from django.views.generic import View
@@ -18,7 +18,7 @@ def index(request): # Landing page
 
 @login_required
 @transaction.atomic
-def update_profile(request): # Shows Profile form
+def update_profile(request): # Shows User and Profile form
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
@@ -32,19 +32,19 @@ def update_profile(request): # Shows Profile form
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'crud/profile.html', {
+    return render(request, 'crud/registration_form.html', {
         'user_form': user_form,
         'profile_form': profile_form
     })
 
-class ProfileView(generic.DetailView): # Shows profile
+'''class ProfileView(generic.DetailView): # Shows profile
     model = User
     template_name = 'crud/user_profile.html'
-
+'''
 class ProfileCreate(CreateView): # Adds profile
-    model = Profile
+    model = User
     fields = ['first_name', 'last_name', 'password', 'email', 'image', 'bio', 'gender']
-
+'''
 class ProfileUpdate(UpdateView): # Updates profile
     model = User
     fields = ['first_name', 'last_name', 'password', 'email', 'image', 'bio', 'gender']
@@ -52,7 +52,7 @@ class ProfileUpdate(UpdateView): # Updates profile
 class ProfileDelete(DeleteView): # Deletes profile
     model = User
     success_url = reverse_lazy('crud:index')
-
+'''
 class LoginForm():
     model = User
     fields = ['email', 'password']
