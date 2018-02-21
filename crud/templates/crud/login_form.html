@@ -3,7 +3,7 @@
 {% block body %}
   <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {% include 'crud/form-template.html' %}
+    {{ login_form.as_p }}                                        <!-- {% include 'crud/form-template.html' %} -->
     <button type="submit">Log In</button>
     <button type="reset">Reset</button>
   </form>

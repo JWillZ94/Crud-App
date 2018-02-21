@@ -8,14 +8,14 @@ app_name = 'crud'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^register/$', views.update_profile, name='register'),
-    url(r'profile/add/$', views.ProfileCreate.as_view(), name='profile-add'),
-    url(r'^login/$', views.LoginForm, name='login'),
+    url(r'^(?P<pk>[0-9]+)/$', views.profile, name="profile"),
+    url(r'^login/$', views.login_user, name='login'),
+    url(r'^logout/$', views.logout_view, name='logout'),
+    url(r'profile/(?P<pk>[0-9]+)/$', views.ProfileUpdate.as_view(), name='profile-update'),
+    url(r'profile/(?P<pk>[0-9]+)/delete/$', views.ProfileDelete.as_view(), name='profile-delete'),
 ]
 
 
 '''
-url(r'^logout/$', views.logout_view, name='logout'),
-url(r'^(?P<pk>[0-9]+)/$', views.ProfileView.as_view(), name="profile"),
-url(r'profile/(?P<pk>[0-9]+)/$', views.ProfileUpdate.as_view(), name='profile-update'),
-url(r'profile/(?P<pk>[0-9]+)/delete/$', views.ProfileDelete.as_view(), name='profile-delete'),
+url(r'profile/add/$', views.profile, name='profile-add'),
 '''
