@@ -1,10 +1,24 @@
 {% extends 'crud/base.html' %}
 
 {% block body %}
-  <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ login_form.as_p }}                                        <!-- {% include 'crud/form-template.html' %} -->
-    <button type="submit">Log In</button>
-    <button type="reset">Reset</button>
-  </form>
+  <div class="page-container">
+    <h1 id="title">Please Log In</h1>
+
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.error %} class="{{ message.error }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ login_form.as_p }}
+      <div class="choice-container">
+        <button type="submit" class="choice-button">Log In</button>
+        <button type="reset" class="choice-button">Reset</button>
+      </div>
+    </form>
+  </div>
 {% endblock %}

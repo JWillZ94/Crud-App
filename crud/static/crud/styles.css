@@ -1,0 +1,50 @@
+body {
+  background: green;
+  color: white;
+  font-family: sans-serif;
+}
+
+body a {
+  color: white;
+  text-decoration: none;
+}
+
+#title {
+  font-size: 3em;
+  text-align: center;
+  padding-bottom: 100px;
+}
+
+.choice-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 100px;
+}
+
+.choice {
+  background: black;
+  padding: 2em;
+  border-radius: 15px;
+}
+
+.choice-button {
+  font-size: 2.5em;
+}
+
+.choice:hover {
+  color: lightgray;
+}
+
+.choice-button:hover {
+  color: green;
+  cursor: pointer;
+}
+
+.page-container {
+  margin: auto;
+  max-width: 80%;
+}
+
+p {
+  padding: 0.5em;
+}

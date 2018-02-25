@@ -1,12 +1,32 @@
 {% extends 'crud/base.html' %}
 
 {% block body %}
-  <h1><a href="{% url 'crud:register' %}">Sign Up</a></h1>
-  <h1><a href="{% url 'crud:login' %}">Login</a></h1>
-  <h1><a href="{% url 'crud:profile' user.pk %}">Profile</a></h1>
 
-  <form action="{% url 'crud:logout' %}">
-    {% csrf_token %}
-    <button type="submit">Log Out</button>
-  </form>
+  <h1 id="title">Welcome to the Django CRUD App!</h1>
+
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.success %} class="{{ message.success }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if user.is_anonymous %}
+    <div class="choice-container">
+      <h1><a href="{% url 'crud:register' %}" class="choice">Sign Up</a></h1>
+      <h1><a href="{% url 'crud:login' %}" class="choice">Login</a></h1>
+    </div>
+  {% endif %}
+
+  {% if user.is_authenticated %}
+    <div class="choice-container">
+      <h1><a href="{% url 'crud:profile' user.pk %}" class="choice">Profile</a></h1>
+      <form action="{% url 'crud:logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="choice-button">Log Out</button>
+      </form>
+    </div>
+  {% endif %}
+
 {% endblock %}

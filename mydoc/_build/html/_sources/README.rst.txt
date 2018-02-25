@@ -1,0 +1,7 @@
+=============================
+Django Crud-App Documentation
+=============================
+
+* You can download this project by running git clone [url of the project on github].
+* For this project you can sign-up by clicking the "Sign Up" button on the title page, filling out the form in the sign-up page and submitting that form through the "Submit" button. The application will log you in and take you to the profile page that has your profile information where you can also choose to update your profile info, delete the profile entirely, or log out. Choosing to update your profile information will take you to a form to update your profile info where you will have to re-fill your password and image. Choosing to delete your profile will log you out, delete your profile, and take you to the title page. Choosing to log out will log you out and take you to the title page. From the title page, choosing to log-in will take you to the log-in page where you will fill out your username and password. After logging in, the application will take you to your profile page.
+* The purpose of the application is to allow a user to make a simple user-profile that will allow them to create their profile, view their profile, update their profile, and delete their profile. It also allows users to have authentication by being able to log-in and log out by using their own username and protected password. 

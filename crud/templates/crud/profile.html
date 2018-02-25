@@ -1,35 +1,43 @@
 {% extends 'crud/base.html' %}
 
 {% block body %}
-  {% if user.is_authenticated %}
-    <p>Username: {{ user.username }}</p>
-    <p>First Name: {{ user.first_name }}</p>
-    <p>Last Name: {{ user.last_name }}</p>
-    <p>Email: {{ user.email }}</p>
-    <img src="{{ user.profile.image.url }}" height="300" alt="profile-img">
-    <p>Bio: {{ user.profile.bio }}</p>
-    <p>Gender: {{ user.profile.gender }}</p>
-  {% endif %}
+  <div class="page-container">
+    <h1 id="title">Profile</h1>
 
-  <form action="{% url 'crud:profile-update' profile.pk %}">
-    {% csrf_token %}
-    <input type="hidden" name="profile_id" value="{{ profile.pk }}">
-    <button type="submit">Update Profile</button>
-  </form>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.success %} class="{{ message.success }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
 
-  <form action="{% url 'crud:profile-delete' profile.pk %}" method="post">
-    {% csrf_token %}
-    <input type="hidden" name="profile_id" value="{{ profile.pk }}">
-    <button type="submit">Delete Profile</button>
-  </form>
+    {% if user.is_authenticated %}
+      <p>Username: {{ user.username }}</p>
+      <p>First Name: {{ user.first_name }}</p>
+      <p>Last Name: {{ user.last_name }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>Image: <img src="{{ user.profile.image.url }}" height="300" alt="profile-img"></p>
+      <p>Bio: {{ user.profile.bio }}</p>
+      <p>Gender: {{ user.profile.gender }}</p>
+    {% endif %}
 
-  <form action="{% url 'crud:logout' %}">
-    {% csrf_token %}
-    <button type="submit">Log Out</button>
-  </form>
+    <div class="choice-container">
+      <form action="{% url 'crud:profile-update' profile.pk %}">
+        {% csrf_token %}
+        <input type="hidden" name="profile_id" value="{{ profile.pk }}">
+        <button type="submit" class="choice-button">Update Profile</button>
+      </form>
+      <form action="{% url 'crud:profile-delete' profile.pk %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="profile_id" value="{{ profile.pk }}">
+        <button type="submit" class="choice-button">Delete Profile</button>
+      </form>
+      <form action="{% url 'crud:logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="choice-button">Log Out</button>
+      </form>
+    </div>
+  </div>
 
-
-  {% if error_message %}
-    <p><strong>{{ error_message }}</strong></p>
-  {% endif %}
 {% endblock %}
