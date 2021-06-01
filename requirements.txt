@@ -21,6 +21,6 @@ six==1.11.0
 snowballstemmer==1.2.1
 Sphinx==1.7.1
 sphinxcontrib-websupport==1.0.1
-urllib3==1.22
+urllib3==1.26.5
 virtualenv==15.1.0
 virtualenvwrapper-win==1.2.1
